@@ -6,6 +6,9 @@ Sensor specifications:
 - Range: 40mm to 4000mm
 - I2C Address: 0x29
 - Operating voltage: 2.6V to 3.5V
+
+Copyright (C) 2025
+SPDX-License-Identifier: GPL-3.0-or-later
 """
 
 import time

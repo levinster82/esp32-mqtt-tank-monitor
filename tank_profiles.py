@@ -1,6 +1,9 @@
 """
 Tank Volume Profiles
 Lookup tables for non-linear tank capacity calculations
+
+Copyright (C) 2025
+SPDX-License-Identifier: GPL-3.0-or-later
 """
 
 # 275 Gallon Vertical Oil Tank (Oval/Obround)

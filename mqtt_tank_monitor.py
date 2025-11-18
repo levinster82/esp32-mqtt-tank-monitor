@@ -2,6 +2,13 @@
 Tank Level Monitor with MQTT and Home Assistant Integration
 MicroPython implementation for ESP32 - MicroPython 1.25 COMPATIBLE
 Ultra-Resilient Version with Integrated Watchdog Support
+
+Copyright (C) 2025
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 """
 
 import machine

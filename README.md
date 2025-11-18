@@ -1,18 +1,18 @@
 # ESP32 MQTT Tank Level Monitor
 
-Monitor liquid levels in tanks using an ESP32 and VL53L1X laser distance sensor. Automatically publishes data to Home Assistant via MQTT with auto-discovery support.
+Monitors liquid levels in tanks using an ESP32 and VL53L1X laser distance sensor. Publishes data to Home Assistant via MQTT with auto-discovery support.
 
-Perfect for monitoring heating oil tanks, water tanks, propane tanks, and other liquid storage systems.
+Suitable for monitoring heating oil tanks, water tanks, propane tanks, and other liquid storage systems.
 
 ## Features
 
-- **Accurate Distance Measurement** - VL53L1X time-of-flight laser sensor (40mm to 4000mm range)
-- **Home Assistant Integration** - MQTT auto-discovery with multiple sensor entities
-- **Non-Linear Tank Support** - Accurate volume calculations for oval/irregular tank shapes
-- **Secure Configuration** - Automatic password encryption using device MAC address
-- **Ultra-Resilient Operation** - Watchdog timer, auto-reconnect, boot loop prevention
-- **Easy Setup** - Interactive setup wizard and calibration script
-- **MicroPython 1.25** - Optimized for ESP32 microcontrollers
+- VL53L1X time-of-flight laser sensor (40mm to 4000mm range)
+- Home Assistant MQTT auto-discovery
+- Non-linear tank volume calculations using lookup tables
+- Password encryption using device MAC address
+- Watchdog timer, auto-reconnect, boot loop prevention
+- Interactive setup wizard and calibration script
+- MicroPython 1.25 compatible
 
 ## Hardware Requirements
 
@@ -45,14 +45,14 @@ esptool.py --port /dev/ttyUSB0 write_flash -z 0x1000 esp32-micropython-1.25.bin
 
 ### 2. Upload Files to ESP32
 
-Using [Thonny IDE](https://thonny.org/) (recommended for beginners):
+Using [Thonny IDE](https://thonny.org/):
 1. Open Thonny
 2. Select "MicroPython (ESP32)" as interpreter
 3. Upload all `.py` files to the ESP32 root directory
 4. Upload the `lib/` folder
 5. Upload the `config/` folder
 
-Or using `ampy` command-line tool:
+Using `ampy` command-line tool:
 
 ```bash
 # Install ampy
@@ -72,7 +72,7 @@ ampy --port /dev/ttyUSB0 put lib
 
 ### 3. Configure Your System
 
-**Option A: Interactive Setup (Recommended)**
+**Option A: Interactive Setup**
 
 1. Connect to ESP32 via serial console (Thonny or screen/minicom)
 2. Run the setup wizard:
@@ -118,27 +118,27 @@ import calibrate
 calibrate.main()
 ```
 
-This measures the distance when empty and calculates the calibration offset automatically.
+This measures the distance when empty and calculates the calibration offset.
 
 ### 5. Start Monitoring
 
-Restart your ESP32. The system will automatically:
+Restart your ESP32. The system will:
 1. Connect to WiFi
 2. Connect to MQTT broker
 3. Send Home Assistant discovery messages
-4. Begin publishing tank level data every 30 seconds
+4. Publish tank level data every 30 seconds (configurable)
 
 ## Home Assistant Integration
 
-### Automatic Discovery
+### Auto-Discovery
 
-The system automatically creates these entities in Home Assistant:
+The system creates these entities in Home Assistant:
 
 | Entity | Description | Unit |
 |--------|-------------|------|
 | **Tank Level** | Liquid depth in tank | inches |
 | **Tank Level Percentage** | Percentage full | % |
-| **Tank Volume** | Actual gallons (if using tank profile) | gallons |
+| **Tank Volume** | Volume in gallons (if using tank profile) | gallons |
 | **Tank Distance Sensor** | Raw sensor reading | mm |
 | **Tank Monitor WiFi Signal** | Signal strength | dBm |
 | **Tank Monitor Memory** | ESP32 available RAM | bytes |
@@ -167,7 +167,7 @@ automation:
 
 ### Using Tank Profiles
 
-Tank profiles provide accurate volume calculations for non-cylindrical tanks by using lookup tables that account for curved geometry.
+Tank profiles provide volume calculations for non-cylindrical tanks using lookup tables that account for curved geometry.
 
 Set in `config.json`:
 ```json
@@ -334,7 +334,7 @@ print("22 inches = {} gallons".format(gallons))
 
 ### Watchdog Timer
 
-The system includes a 120-second watchdog timer that automatically resets the ESP32 if it hangs. The watchdog is fed throughout normal operations but will trigger if:
+The system includes a 120-second watchdog timer that resets the ESP32 if it hangs. The watchdog is fed throughout normal operations but will trigger if:
 - WiFi connection hangs
 - MQTT operations freeze
 - Sensor reading blocks indefinitely
@@ -353,10 +353,10 @@ Lower values provide more frequent updates but use more power and network bandwi
 
 ## Security Notes
 
-- **Password Encryption**: WiFi and MQTT passwords are automatically encrypted using the ESP32's unique MAC address
+- **Password Encryption**: WiFi and MQTT passwords are encrypted using the ESP32's unique MAC address
 - **SSL/TLS Required**: MQTT connections must use SSL (enforced by configuration validation)
 - **Config Protection**: Encrypted passwords are device-specific and cannot be decrypted on other devices
-- **No Plaintext Storage**: Passwords are automatically migrated to encrypted format on first boot
+- **No Plaintext Storage**: Passwords are migrated to encrypted format on first boot
 
 ## Project Structure
 
@@ -378,3 +378,17 @@ esp32_mqtt_tank_monitor/
     ├── config.json.template   # Configuration template
     └── config.json            # Your configuration (create from template)
 ```
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 (GPL-3.0) - see the [LICENSE](LICENSE) file for details.
+
+### What this means:
+
+- ✅ You can use, modify, and distribute this software freely
+- ✅ You can use it for commercial purposes
+- ⚠️ If you distribute modified versions, you must also release them under GPL-3.0
+- ⚠️ You must include the source code with any distributed binaries
+- ⚠️ Any derivative works must also be open source under GPL-3.0
+
+This ensures the project remains free and open source for everyone.

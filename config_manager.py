@@ -2,6 +2,9 @@
 Configuration Manager for ESP32 Tank Monitor
 Handles secure loading and validation of configuration data
 MicroPython 1.25 Compatible
+
+Copyright (C) 2025
+SPDX-License-Identifier: GPL-3.0-or-later
 """
 
 import json
