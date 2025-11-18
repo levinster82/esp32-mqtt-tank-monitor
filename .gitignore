@@ -1,0 +1,43 @@
+# Claude Code documentation (developer-specific)
+CLAUDE.md
+
+# Configuration file (contains sensitive credentials)
+# Ignore config.json anywhere in the repository
+**/config.json
+config.json
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# MicroPython compiled files
+*.mpy
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Thonny IDE files
+.thonny/
+
+# Environment files
+.env
+.env.local
+
+# Log files
+*.log
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Temporary files
+*.tmp
+.temp/

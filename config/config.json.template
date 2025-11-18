@@ -1,0 +1,33 @@
+{
+  "wifi": {
+    "ssid": "YOUR_WIFI_SSID",
+    "password": "YOUR_WIFI_PASSWORD"
+  },
+  "mqtt": {
+    "broker": "BROKER_IP",
+    "port": 8883,
+    "username": "MQTT_USERNAME",
+    "password": "YOUR_MQTT_PASSWORD",
+    "ssl": true
+  },
+  "tank": {
+    "height": 44,
+    "calibration_offset": 0.0,
+    "empty_level": 0,
+    "profile": "275_vertical_oval"
+  },
+  "thresholds": {
+    "low_level": 10.0,
+    "high_level": 95.0
+  },
+  "intervals": {
+    "measurement": 5.0,
+    "publish": 30.0,
+    "wifi_check": 300
+  },
+  "hardware": {
+    "sda_pin": 21,
+    "scl_pin": 22,
+    "i2c_freq": 400000
+  }
+}
